@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { generateContent, type GeminiTurn } from "@/lib/geminiClient";
 
 const SYSTEM_PROMPT = `
 You are "Ask V.Aman" — the Executive AI Copilot and Cybernetic Synthetic Twin of Aman Kumar Singh.
@@ -87,56 +88,32 @@ export async function POST(req: NextRequest) {
     // Tier 1: Primary - Google Gemini API
     // -------------------------------------------------------------
     if (geminiKey) {
-      try {
-        const contents = [
-          { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
-          {
-            role: "model",
-            parts: [
-              {
-                text: "Understood. I am Ask V.Aman, executive AI copilot for Aman Kumar Singh. I will provide crisp, technically thorough, STAR-structured responses.",
-              },
-            ],
-          },
-          ...history.map((h: { role: string; text: string }) => ({
-            role: h.role === "assistant" ? "model" : "user",
-            parts: [{ text: h.text }],
-          })),
-          { role: "user", parts: [{ text: message }] },
-        ];
+      const contents: GeminiTurn[] = [
+        { role: "user", text: SYSTEM_PROMPT },
+        {
+          role: "model",
+          text: "Understood. I am Ask V.Aman, executive AI copilot for Aman Kumar Singh. I will provide crisp, technically thorough, STAR-structured responses.",
+        },
+        ...history.map((h: { role: string; text: string }) => ({
+          role: h.role === "assistant" ? ("model" as const) : ("user" as const),
+          text: h.text,
+        })),
+        { role: "user", text: message },
+      ];
 
-        // Clean headers: do NOT pass local referer which triggers 403 if restricted
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              contents,
-              generationConfig: {
-                temperature: 0.65,
-                maxOutputTokens: 950,
-              },
-            }),
-          }
-        );
+      const gemini = await generateContent(geminiKey, {
+        contents,
+        temperature: 0.65,
+        maxOutputTokens: 950,
+      });
 
-        if (geminiRes.ok) {
-          const data = await geminiRes.json();
-          const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (reply) {
-            return NextResponse.json({
-              reply,
-              source: "gemini-1.5-flash",
-              isStar: detectStar(reply),
-              suggestedAction: extractAction(message, reply),
-            });
-          }
-        }
-      } catch (geminiErr) {
-        console.warn("Gemini direct call warning:", geminiErr);
+      if (gemini) {
+        return NextResponse.json({
+          reply: gemini.text,
+          source: gemini.model,
+          isStar: detectStar(gemini.text),
+          suggestedAction: extractAction(message, gemini.text),
+        });
       }
     }
 

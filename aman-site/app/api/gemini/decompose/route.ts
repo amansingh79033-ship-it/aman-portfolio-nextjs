@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { generateContent } from "@/lib/geminiClient";
 
 const DECOMPOSE_SYSTEM_PROMPT = `
 You are the "Aman Agentic Delegation Engine", embodying Aman Kumar Singh's one-agent-one-task architecture.
@@ -129,51 +130,29 @@ export async function POST(req: NextRequest) {
 
     // Attempt Gemini call
     if (apiKey) {
-      try {
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              contents: [
-                { role: "user", parts: [{ text: DECOMPOSE_SYSTEM_PROMPT }] },
-                { role: "model", parts: [{ text: "Understood. I will decompose any instruction into the 10-Agent Pipeline strictly formatted as JSON." }] },
-                { role: "user", parts: [{ text: `Decompose this engineering instruction into the 10-agent pipeline: "${prompt}"` }] },
-              ],
-              generationConfig: {
-                temperature: 0.2,
-                responseMimeType: "application/json",
-              },
-            }),
-          }
-        );
+      const gemini = await generateContent(apiKey, {
+        contents: [
+          { role: "user", text: DECOMPOSE_SYSTEM_PROMPT },
+          { role: "model", text: "Understood. I will decompose any instruction into the 10-Agent Pipeline strictly formatted as JSON." },
+          { role: "user", text: `Decompose this engineering instruction into the 10-agent pipeline: "${prompt}"` },
+        ],
+        temperature: 0.2,
+        jsonMode: true,
+      });
 
-        if (geminiRes.ok) {
-          const data = await geminiRes.json();
-          const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (rawText) {
-            try {
-              const parsed = JSON.parse(rawText);
-              if (parsed && typeof parsed === "object" && Array.isArray(parsed.stages)) {
-                return NextResponse.json({
-                  ...parsed,
-                  source: "gemini-1.5-flash",
-                });
-              }
-              console.warn("Gemini decompose response did not match the expected schema");
-            } catch (parseError) {
-              console.warn("Gemini decompose returned invalid JSON:", parseError);
-            }
+      if (gemini) {
+        try {
+          const parsed = JSON.parse(gemini.text);
+          if (parsed && typeof parsed === "object" && Array.isArray(parsed.stages)) {
+            return NextResponse.json({
+              ...parsed,
+              source: gemini.model,
+            });
           }
-        } else {
-          const err = await geminiRes.json().catch(() => ({}));
-          console.warn("Gemini decompose note:", err?.error?.message || geminiRes.statusText);
+          console.warn("Gemini decompose response did not match the expected schema");
+        } catch (parseError) {
+          console.warn("Gemini decompose returned invalid JSON:", parseError);
         }
-      } catch (err) {
-        console.warn("Gemini decompose fallback triggered:", err);
       }
     }
 
