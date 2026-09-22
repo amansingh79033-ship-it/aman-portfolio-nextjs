@@ -1,0 +1,28 @@
+# deps / build output
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# env & secrets
+.env
+.env.*
+!.env.example
+
+# platform / tooling caches
+.vercel
+.netlify/
+.netlify-config/
+.npm-cache/
+.qoder-tmp/
+
+# editors / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*

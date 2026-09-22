@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: #0a0b10;
+  color: #e9eaee;
+  overflow-x: hidden;
+}
+
+body {
+  min-width: 0;
+}
+
+canvas {
+  display: block;
+}
+
+::selection {
+  background: #5eead4;
+  color: #0a0b10;
+}
+
+/* thin custom scrollbar, kept quiet */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b10;
+}
+::-webkit-scrollbar-thumb {
+  background: #23273a;
+  border-radius: 8px;
+}
+
+/* visible keyboard focus everywhere — accessibility floor */
+:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* respect reduced motion system-wide */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* task-graph divider motif — the site's structural signature */
+.node-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.node-rule::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.node-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, currentColor, transparent);
+  opacity: 0.35;
+}
+
+/* Executive Print Formatting for PDF Export */
+@media print {
+  header,
+  footer,
+  .fixed,
+  canvas {
+    display: none !important;
+  }
+
+  body,
+  html {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  #documents {
+    display: block !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  #documents * {
+    color: #111827 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: #e5e7eb !important;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "aman-portfolio-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio of Aman Kumar Singh - Full-Stack & Agentic Systems Engineer",
+  "scripts": {
+    "dev": "node aman-site/scripts/dev.js",
+    "build": "npm --prefix aman-site run build",
+    "start": "npm --prefix aman-site run start",
+    "lint": "npm --prefix aman-site run lint"
+  },
+  "dependencies": {
+    "@base44/sdk": "^0.8.48",
+    "radius-sdk": "https://radius.floot.app/_api/integrations/sdk/package"
+  }
+}

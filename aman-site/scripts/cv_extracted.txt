@@ -1,0 +1,180 @@
+   
+
+             Aman Kumar Singh   
+
+           Site Reliability Engineer  ·  DevOps Engineer  ·  Founder & CEO   
+
+           Bengaluru, Karnataka, India  |  asingh@wandrian.com  |  linkedin.com/in/aman-kumar-singh-5688b41b3   
+
+
+     
+
+
+              PROFESSIONAL SUMMARY   
+
+          Results-driven Site Reliability Engineer and DevOps practitioner with production experience maintaining high-availability cloud infrastructure for international travel booking platforms. Specialises in AI-powered observability, autonomous log intelligence, and agentic incident response systems. Parallel track as a serial entrepreneur — founding and operating multiple ventures across AI-native SaaS, real estate technology, automotive compute platforms, and educational technology — with deep expertise in full-stack system design, product engineering, and go-to-market execution.   
+
+
+              CORE COMPETENCIES   
+
+          Site Reliability Engineering  ·  DevOps  ·  Cloud Infrastructure (AWS)  ·  Linux Administration  ·  Python  ·  JavaScript / TypeScript  ·  React  ·  Next.js  ·  FastAPI  ·  Apache Kafka  ·  Redis  ·  PostgreSQL  ·  TimescaleDB  ·  OpenSearch  ·  Docker  ·  CI/CD  ·  Observability & Log Analysis  ·  Synthetic Monitoring  ·  Incident Response  ·  AI / LLM Application Development  ·  Agentic AI Systems  ·  Security (VAPT)  ·  System Design  ·  Product Management  ·  Entrepreneurship   
+
+
+              PROFESSIONAL EXPERIENCE   
+
+            Site Reliability Engineer / DevOps Engineer            |              Wandrian            |            Bengaluru, India            |              [Month Year] – Present   
+
+
+                 Manage end-to-end availability and reliability of the Italia Rail platform family — ItaliaRail, ItaliaPlanner, ItaliaPass, ItaliaTours — international travel booking systems serving global traffic.   
+
+
+                 Designed and built an AI-powered log intelligence and heartbeat monitoring platform integrating AWS CloudWatch and Loggly, enabling proactive anomaly detection and real-time alerting across all four properties.   
+
+
+                 Implemented synthetic checkout funnel dry-runs across all Italia Rail properties for continuous uptime validation and early failure detection before end-user impact.   
+
+
+                 Diagnosed and remediated critical CPU overload and EC2 auto-scaling failures on production ItaliaRail infrastructure (t3.medium); produced root cause analysis documentation and architectural remediation recommendations.   
+
+
+                 Engineered SSL automation tooling for Acquia Cloud, eliminating manual certificate renewal risk and reducing certificate management overhead.   
+
+
+                 Developed AWS S3 log-fetching pipelines and Gmail/SendGrid-based ticket email automation scripts, significantly improving incident triage velocity and reducing time-to-response.   
+
+
+                 Authored and presented the Q3 2026 SRE roadmap covering 14 strategic initiatives across observability, reliability, automation, security, and cost optimisation.   
+
+
+                 Conducted competitive infrastructure analysis for manager budget presentations and cloud procurement decisions; researched monitoring platform alternatives with cost-benefit breakdowns.   
+
+   
+
+
+              ENTREPRENEURIAL VENTURES   
+
+            Founder & CEO            |              Q-Re-Us Minds            |            Bengaluru, India            |              [Year] – Present   
+
+
+                 Founded a product and applied research organisation building AI-native SaaS tools for SRE, DevOps, and analytics workflows — guided by the philosophy: "Build machines that handle what machines do best, so humans can do what only humans can."   
+
+
+                 Metric+: Designed and built an intelligent analytics platform to eliminate repetitive analytical work for engineers and data teams, restoring capacity for judgment-driven and creative work.   
+
+
+                 resolvE.io: Engineered an agentic AI incident response platform with multi-cloud integrations, adaptive confidence scoring, human-confirmation gates, and a unified one-sight operations dashboard.   
+
+
+                 Woxy: Built an edge fraud and bot protection gateway powered by SambaNova DeepSeek-V3.2, featuring a public transparency ledger; delivered FastAPI backend, animated landing page, and React transparency dashboard.   
+
+
+                 OverWatch AHI: Architected an enterprise observability and autonomous incident intelligence platform — tech stack: Next.js, FastAPI, Kafka, Redis, PostgreSQL, TimescaleDB, OpenSearch. Produced full architecture, DB schema, route map, and Phase 1 implementation plan.   
+
+
+                 Sentinel: Built an autonomous log analysis and intelligence tool using Google Gemini as its reasoning engine, with SOP-to-playbook ingestion, AWS CloudWatch and Loggly integration, automated PDF report generation, and Slack delivery.   
+
+   
+
+            Founder & CEO            |              Vitran AI  (formerly VehEdge)            |            Bengaluru, India            |              [Year] – Present   
+
+
+                 Founded a Vehicle-as-a-Compute platform targeting Indian OEMs, enabling distributed in-vehicle compute infrastructure for connected and next-generation automotive applications.   
+
+
+                 Delivered comprehensive business plan, interactive fleet simulation, and an immersive Three.js landing page to demonstrate platform capabilities to prospective OEM and investor audiences.   
+
+   
+
+            Founder            |              Propertyfie.com  /  Mahiya Real Estate Solutions Pvt. Ltd.            |            Bengaluru, India            |              [Year] – Present   
+
+
+                 Founded a real estate technology platform and solutions company serving the Bengaluru residential and commercial property market under RERA compliance.   
+
+
+                 Designed and built a full-featured WhatsApp CRM with multi-agent support, ticketing system, and incoming call flow — enabling distributed real estate sales teams to manage lead pipelines centrally.   
+
+
+                 Evaluated and implemented WhatsApp Business Calling API integrations; authored all HR legal documentation including offer letters, experience letters, relieving letters, and RERA-compliant internship agreements.   
+
+   
+
+            Founder            |              CuriousMinds.online            |            Bengaluru, India            |              [Year] – Present   
+
+
+                 Founded an educational technology and AI research platform focused on intelligent systems and cognitive agent research.   
+
+
+                 Conducted foundational research on the Khyati-7 / AHI framework — Bidirectional Verification in AI systems — exploring novel trust and validation mechanisms for agentic AI.   
+
+
+                 Developed the beYOU GPT: an on-device cognitive agent design guide for edge-deployed personal AI assistants.   
+
+
+              KEY PROJECTS   
+
+            MarketPulse Pro              —  AI Trading Terminal  |  React · Angel One SmartAPI · F&O   
+
+          Built a full-featured AI-powered trading terminal with Angel One SmartAPI integration, paper trading simulator, F&O expiry date calculator, and a custom SVG icon system — purpose-built for Indian equity and index options markets.   
+
+            Bihar Government Startup Portal              —  VAPT Security Assessment  |  Python · React · OWASP   
+
+          Conducted an end-to-end professional security vulnerability assessment of the Bihar Government startup portal; produced a graded HTML security report with severity classifications and a full React-based VAPT testing platform for structured retesting and compliance tracking.   
+
+            Nifty 50 Historical Pattern Research              —  F&O Session Forecasting   
+
+          Systematic research on Nifty 50 historical price patterns and expiry-eve dynamics; developed detailed F&O scenario playbooks for index options session forecasting with statistical analysis of pre- and post-expiry market behaviour.   
+
+            LexCorrect              —  AI Legal Document Correction Tool  |  Python · NLP   
+
+          Built an AI-powered document correction and normalisation tool specialised for Indian legal language, statutory terminology, and drafting conventions — reducing manual review effort for legal professionals.   
+
+            HIRED              —  AI-Native Recruitment Platform   
+
+          Designed and developed an AI-native recruitment platform for end-to-end candidate sourcing, screening, and workflow automation — covering job matching, shortlisting, and structured interview pipeline management.   
+
+            ItaliaRail Log Analysis Dashboard              —  React · AWS CloudWatch · Loggly   
+
+          Developed a bespoke React-based log analysis and monitoring dashboard for the ItaliaRail production environment, providing real-time visibility into EC2 auto-scaling events, error patterns, and infrastructure health metrics.   
+
+
+              TECHNICAL SKILLS   
+
+            Cloud & Infrastructure:           AWS (CloudWatch, EC2 Auto Scaling, S3, SNS), Acquia Cloud, Linux Administration   
+
+            DevOps & SRE:           CI/CD Pipelines, SSL Automation, Synthetic Monitoring, Log Analysis, Incident Response, Observability, Auto Scaling   
+
+            Languages:           Python, JavaScript, TypeScript, Shell Scripting   
+
+            Frameworks & Libraries:           React, Next.js, FastAPI, Node.js, Three.js   
+
+            Databases:           PostgreSQL, TimescaleDB, Redis, SQLite   
+
+            Messaging & Search:           Apache Kafka, OpenSearch, Loggly, AWS CloudWatch   
+
+            AI / LLMs:           Google Gemini API, Anthropic Claude API, SambaNova DeepSeek-V3.2, Angel One SmartAPI   
+
+            Security:           VAPT, Web Application Security, Vulnerability Assessment, SSL/TLS, OWASP Top 10   
+
+            Integrations:           WhatsApp Business API, Gmail API, SendGrid, Slack API, AWS SNS   
+
+            Tools & Platforms:           Git, GitHub, Jira, Loggly, New Relic (concept), LibreOffice Automation   
+
+
+              EDUCATION   
+
+            [ YOUR DEGREE — e.g. B.E. Computer Science / B.Tech / MCA ]            |            [ UNIVERSITY / INSTITUTION NAME ]            |            [ City, India ]            |              [ Graduation Year ]   
+
+
+              CERTIFICATIONS   
+
+          [ Add any relevant certifications here — e.g. AWS Certified Solutions Architect, Google Cloud Professional, HashiCorp Terraform Associate, CKA (Kubernetes), etc. ]   
+
+
+              LANGUAGES   
+
+            English:           Professional Working Proficiency   
+
+            Hindi:           Native / Bilingual Proficiency    
+
+
+    
