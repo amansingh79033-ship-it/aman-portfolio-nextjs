@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateContent, type GeminiTurn } from "@/lib/geminiClient";
+import { hasGeminiKeys, poolStatus } from "@/lib/geminiKeyPool";
+
+// Raise the function wall-clock beyond Vercel's 10s default (Hobby allows 60s)
+// so a Gemini reply never gets hard-killed mid-generation.
+export const maxDuration = 60;
 
 const SYSTEM_PROMPT = `
 You are "Ask V.Aman" — the Executive AI Copilot and Cybernetic Synthetic Twin of Aman Kumar Singh.
@@ -81,13 +86,12 @@ export async function POST(req: NextRequest) {
           .slice(-20)
       : [];
 
-    const geminiKey = process.env.GEMINI_API_KEY || "";
     const openaiKey = process.env.OPENAI_API_KEY || "";
 
     // -------------------------------------------------------------
-    // Tier 1: Primary - Google Gemini API
+    // Tier 1: Primary - Google Gemini API (rotating multi-key pool)
     // -------------------------------------------------------------
-    if (geminiKey) {
+    if (hasGeminiKeys()) {
       const contents: GeminiTurn[] = [
         { role: "user", text: SYSTEM_PROMPT },
         {
@@ -101,7 +105,7 @@ export async function POST(req: NextRequest) {
         { role: "user", text: message },
       ];
 
-      const gemini = await generateContent(geminiKey, {
+      const gemini = await generateContent({
         contents,
         temperature: 0.65,
         maxOutputTokens: 950,
@@ -113,6 +117,7 @@ export async function POST(req: NextRequest) {
           source: gemini.model,
           isStar: detectStar(gemini.text),
           suggestedAction: extractAction(message, gemini.text),
+          rpm: poolStatus(),
         });
       }
     }
@@ -154,6 +159,7 @@ export async function POST(req: NextRequest) {
               source: "openai-gpt-4o-mini",
               isStar: detectStar(reply),
               suggestedAction: extractAction(message, reply),
+              rpm: poolStatus(),
             });
           }
         }
@@ -173,8 +179,9 @@ export async function POST(req: NextRequest) {
       source: "executive-local-engine",
       isStar: localResponse.isStar,
       suggestedAction: localResponse.suggestedAction,
-      note: geminiKey
-        ? "Gemini API key active (Local Engine backup active)"
+      rpm: poolStatus(),
+      note: hasGeminiKeys()
+        ? "Gemini key pool active (Local Engine backup active)"
         : "Executive Local Neural Engine active",
     });
   } catch (error: unknown) {

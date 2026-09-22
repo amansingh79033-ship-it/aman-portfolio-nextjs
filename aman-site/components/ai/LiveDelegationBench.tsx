@@ -14,6 +14,7 @@ import {
   Terminal,
   Sparkles,
 } from "lucide-react";
+import { reportRpm, type RpmStatus } from "@/lib/rpmBus";
 
 type Stage = {
   agent: number;
@@ -42,6 +43,7 @@ type DecomposeResult = {
     rubrics: CriticRubric[];
   };
   source?: string;
+  rpm?: RpmStatus;
 };
 
 const PRESETS = [
@@ -74,6 +76,7 @@ export default function LiveDelegationBench() {
 
       if (!res.ok) throw new Error("Decomposition dispatch failed");
       const data: DecomposeResult = await res.json();
+      reportRpm(data.rpm);
       setResult(data);
       setActiveStep(1);
     } catch (err) {

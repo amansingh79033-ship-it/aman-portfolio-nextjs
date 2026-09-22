@@ -26,6 +26,7 @@ import {
   VOICE_PERSONAS,
   SpeechState,
 } from "@/lib/voiceEngine";
+import { reportRpm } from "@/lib/rpmBus";
 
 type Message = {
   id: string;
@@ -132,6 +133,7 @@ export default function AmanAICopilot() {
 
       if (!res.ok) throw new Error("API dispatch failed");
       const data = await res.json();
+      reportRpm(data.rpm);
 
       const botMsg: Message = {
         id: `bot-${Date.now()}`,
@@ -447,7 +449,7 @@ export default function AmanAICopilot() {
                     <RefreshCw size={13} className="animate-spin" />
                   </div>
                   <span className="text-[11px] font-mono animate-pulse">
-                    Ask V.Aman is reasoning via Executive Engine...
+                    Ask V.Aman is reasoning…
                   </span>
                 </div>
               )}

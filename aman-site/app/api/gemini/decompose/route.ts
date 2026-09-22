@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateContent } from "@/lib/geminiClient";
+import { hasGeminiKeys, poolStatus } from "@/lib/geminiKeyPool";
+
+// Decomposition emits a large 10-stage JSON, so give the function headroom
+// beyond Vercel's 10s default (Hobby now supports up to 60s).
+export const maxDuration = 60;
 
 const DECOMPOSE_SYSTEM_PROMPT = `
 You are the "Aman Agentic Delegation Engine", embodying Aman Kumar Singh's one-agent-one-task architecture.
@@ -126,17 +131,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing task prompt" }, { status: 400 });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY || "";
-
-    // Attempt Gemini call
-    if (apiKey) {
-      const gemini = await generateContent(apiKey, {
+    // Attempt Gemini call (rotating multi-key pool)
+    if (hasGeminiKeys()) {
+      const gemini = await generateContent({
         contents: [
           { role: "user", text: DECOMPOSE_SYSTEM_PROMPT },
           { role: "model", text: "Understood. I will decompose any instruction into the 10-Agent Pipeline strictly formatted as JSON." },
           { role: "user", text: `Decompose this engineering instruction into the 10-agent pipeline: "${prompt}"` },
         ],
         temperature: 0.2,
+        maxOutputTokens: 4096,
+        thinkingBudget: 0,
         jsonMode: true,
       });
 
@@ -147,6 +152,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({
               ...parsed,
               source: gemini.model,
+              rpm: poolStatus(),
             });
           }
           console.warn("Gemini decompose response did not match the expected schema");
@@ -256,10 +262,10 @@ export async function POST(req: NextRequest) {
         ]
       },
       source: "gemini-synthetic-pipeline",
-      note: apiKey ? "Gemini API key configured" : "Local engine"
+      note: hasGeminiKeys() ? "Gemini key pool configured" : "Local engine"
     };
 
-    return NextResponse.json(dynamicResult);
+    return NextResponse.json({ ...dynamicResult, rpm: poolStatus() });
   } catch (err: unknown) {
     console.error("Decompose API error:", err);
     return NextResponse.json(

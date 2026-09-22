@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AmanAICopilot from "@/components/ai/AmanAICopilot";
+import RpmToast from "@/components/ai/RpmToast";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <AmanAICopilot />
+        <RpmToast />
       </body>
     </html>
   );
